@@ -51,7 +51,7 @@ VICTOR <- function(seuratObj_Query, seuratObj_Ref,
   modify_metadata_cols_VICTOR <- function(seuratObj) {
     colnames(seuratObj@meta.data) <- sapply(colnames(seuratObj@meta.data), function(name) {
       if(grepl("^VICTOR_", name) && !name %in% c("VICTOR_max", "VICTOR_prediction", "VICTOR_no_rejection")) {
-        paste0(gsub("_", " ", gsub("_plus", "+", gsub("^VICTOR_", "", name))), " VICTORcore")
+        paste0(gsub("_", " ", gsub("_plus", "+", gsub("^VICTOR_", "", name))), " VICTORScore")
       } else { name }
     })
     return(seuratObj) # Return the modified Seurat object
@@ -63,7 +63,7 @@ VICTOR <- function(seuratObj_Query, seuratObj_Ref,
   #### Ref: Optimization threshold ####
   # source("FUN_ROC.R")
   ROC_Ref.lt <-   roc_analysis(seuratObj_Ref, Set_ACT = "Actual_Cell_Type",
-                               Set_Anno = "Actual_Cell_Type", Set_Col = " VICTORcore",
+                               Set_Anno = "Actual_Cell_Type", Set_Col = " VICTORScore",
                                DefaultThr = 0.5)
   ROC_Ref.df <- generate_roc_data(ROC_Ref.lt, title_prefix = paste("Reference"))
   seuratObj_Ref@misc[["ROC"]][["ROC_Ref.lt"]] <- ROC_Ref.lt
