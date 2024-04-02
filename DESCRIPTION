@@ -1,5 +1,5 @@
 Package: VICTOR
-Title: What the Package Does (One Line, Title Case)
+Title: Validation and Inspection of Cell Type Annotation through Optimal Regression
 Version: 0.0.0.9000
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
