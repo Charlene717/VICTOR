@@ -2,7 +2,7 @@
 % Please edit documentation in R/VICTOR.R
 \name{VICTOR}
 \alias{VICTOR}
-\title{This function allows you to diagnose cell annotation labels.}
+\title{Function for diagnosing cell annotation labels.}
 \usage{
 VICTOR(
   seuratObj_Query,
