@@ -1,7 +1,7 @@
 
 # source("Set_plot_color.R")  # source("Set_pbmc3k_plot.R")
 
-## 函數：進行ROC分析
+## Function: Perform ROC Analysis
 roc_analysis <- function(seurat_obj, Set_ACT = "Actual Cell Type",
                          Set_Anno = "Annotation", Set_Col = " Score",
                          DefaultThr = 0.5) {
@@ -36,7 +36,7 @@ roc_analysis <- function(seurat_obj, Set_ACT = "Actual Cell Type",
 }
 
 
-## 函數：繪製ROC曲線
+## Function: Plot ROC Curves
 plot_ROC <- function(ROC_list, combined = FALSE, color_vector = NULL,
                      title_prefix = "", DefaultThr = 0.5) {
   combined_data_ROC <- data.frame()
@@ -44,7 +44,7 @@ plot_ROC <- function(ROC_list, combined = FALSE, color_vector = NULL,
   for (cell_type in names(ROC_list)) {
     roc_obj <- ROC_list[[cell_type]]$roc_obj
     optimal_threshold <- ROC_list[[cell_type]][["optimal_threshold"]]
-    # 如果optimal_threshold包含任何Inf, -Inf或NaN
+    # If optimal_threshold contains any Inf, -Inf, or NaN
     if (any(is.infinite(optimal_threshold) | is.nan(optimal_threshold))) {
       optimal_threshold <- DefaultThr
     }
@@ -97,16 +97,16 @@ plot_ROC <- function(ROC_list, combined = FALSE, color_vector = NULL,
     combined_data_ROC$legend_label <- as.character(combined_data_ROC$legend_label)
     combined_data_ROC$extracted_cell_type <- trimws(gsub(" \\(AUC:.*$", "", combined_data_ROC$legend_label))
 
-    # 使用extracted_cell_type来获取颜色
+    # Use extracted_cell_type to get colors
     if (!is.null(color_vector) && all(combined_data_ROC$extracted_cell_type %in% names(color_vector))) {
       combined_data_ROC$color <- color_vector[combined_data_ROC$extracted_cell_type]
-      # 確保每一行都有正確的顏色映射，否則使用預設顏色
+      # Ensure each row has the correct color mapping, otherwise use default color
       combined_data_ROC$color[is.na(combined_data_ROC$color)] <-scales::hue_pal()(length(names(ROC_list)) )[which(cell_type == names(ROC_list))]
     } else {
       combined_data_ROC$color <- scales::hue_pal()(nrow(combined_data_ROC))
     }
 
-    # 繪圖
+    ## Plot Figure
     # Before plotting, create a named color vector that ensures that each unique legend label gets its own color.
     named_color_vector <- setNames(as.character(combined_data_ROC$color), combined_data_ROC$legend_label)
 
