@@ -61,7 +61,7 @@ VICTOR <- function(seuratObj_Query, seuratObj_Ref,
   seuratObj_Query = modify_metadata_cols_VICTOR(seuratObj_Query)
 
   #### Ref: Optimization threshold ####
-  # source("FUN_ROC.R")
+  # source("ROC_Analysis.R")
   ROC_Ref.lt <-   roc_analysis(seuratObj_Ref, Set_ACT = "Actual_Cell_Type",
                                Set_Anno = "Actual_Cell_Type", Set_Col = " VICTORScore",
                                DefaultThr = 0.5)
@@ -101,6 +101,10 @@ VICTOR <- function(seuratObj_Query, seuratObj_Ref,
   metadata[[paste0("Diag_", score_type,"_", AnnotCellTypeColumn,  "_StatROC")]] <- ifelse(metadata[[metadata_col]] < thresholds, "F", "T")
 
   seuratObj_Query@meta.data <- metadata
+
+  seuratObj_Query@meta.data <- seuratObj_Query@meta.data[, !colnames(seuratObj_Query@meta.data) %in% c("VICTOR_max", "VICTOR_prediction", "VICTOR_no_rejection")]
+  seuratObj_Ref@meta.data <- seuratObj_Ref@meta.data[, !colnames(seuratObj_Ref@meta.data) %in% c("VICTOR_max", "VICTOR_prediction", "VICTOR_no_rejection")]
+
 
   #### Export ####
   Output.lt <- list(Query = seuratObj_Query, Reference = seuratObj_Ref)
