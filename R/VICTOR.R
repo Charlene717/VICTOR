@@ -38,12 +38,12 @@ VICTOR <- function(seuratObj_Query, seuratObj_Ref,
   }
 
   ## Ref
-  if(!"VICTOR_max" %in% colnames(seuratObj_Ref@meta.data)) {
+  if (!any(grepl("VICTORScore$", colnames(seuratObj_Ref@meta.data)))) { # if(!"VICTOR_max" %in% colnames(seuratObj_Ref@meta.data)) {
     seuratObj_Ref <- VICTORPrep(seuratObj_Ref, seuratObj_Ref) #, threshold = Set_scPredict_Thr)
   }
 
   ## Query
-  if(!"VICTOR_max" %in% colnames(seuratObj_Query@meta.data)) {
+  if (!any(grepl("VICTORScore$", colnames(seuratObj_Query@meta.data)))) {  # if(!"VICTOR_max" %in% colnames(seuratObj_Query@meta.data)) {
     seuratObj_Query <- VICTORPrep(seuratObj_Query, seuratObj_Ref) #, threshold = Set_scPredict_Thr)
   }
 
