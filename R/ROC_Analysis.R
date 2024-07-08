@@ -1,5 +1,5 @@
 
-# source("Set_plot_color.R")  # source("Set_pbmc3k_plot.R")
+# source("Set_plot_color.R")
 
 ## Function: Perform ROC Analysis
 roc_analysis <- function(seurat_obj, Set_ACT = "Actual Cell Type",
@@ -132,7 +132,7 @@ plot_ROC <- function(ROC_list, combined = FALSE, color_vector = NULL,
 }
 
 
-## 函數：生成結果的DataFrame
+## Function: Generate the DataFrame of the result
 generate_roc_data <- function(ROC_list, title_prefix = "") {
   results_ROC_df <- data.frame()
   for (cell_type in names(ROC_list)) {
@@ -149,8 +149,7 @@ generate_roc_data <- function(ROC_list, title_prefix = "") {
   return(results_ROC_df)
 }
 
-# ## 使用示例：
-# ## 假設你的Seurat對象是 seuratObject_Ref 和 seuratObject_Sample
+## Test Function
 # ROC_list_Sample <- roc_analysis(seuratObject_Sample)
 # ROC_list_Ref <- roc_analysis(seuratObject_Ref, Set_Anno = "Actual Cell Type")
 #
