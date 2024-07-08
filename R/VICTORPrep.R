@@ -42,7 +42,9 @@ setGeneric("get_metadata", def = function(object) {
 ################################################################################
 ## getFeatureSpace.R
 
-getFeatureSpace <- function(object, pvar, correction = "fdr", sig = 1, reduction = "pca"){
+getFeatureSpace <- function(object, pvar, correction = "fdr",
+                            sig = 1, reduction = "pca",
+                            seurat_version = "V5",...){
 
 
   # Validations -------------------------------------------------------------
@@ -107,7 +109,13 @@ getFeatureSpace <- function(object, pvar, correction = "fdr", sig = 1, reduction
 
   features <- rownames(loadings)
 
-  data <- GetAssayData(object, "data", assay = assay)[features,]
+  if(seurat_version == "V5"){
+    data <- GetAssayData(object, layer = "data", assay = assay)[features,]
+  }else{
+    data <- GetAssayData(object, "data", assay = assay)[features,]
+  }
+
+
   means <- Matrix::rowMeans(data)
 
   rowVar <- function(x, ...) {
@@ -242,6 +250,7 @@ project_query <- function(new,
                           max.iter.harmony = 20,
                           recompute_alignment = TRUE,
                           seed = 66,
+                          seurat_version = "V5",
                           ...){
 
 
@@ -300,8 +309,12 @@ project_query <- function(new,
     ref_loadings <- ref_loadings[shared_features, ]
 
 
+    if(seurat_version == "V5"){
+      new_data <- GetAssayData(new, layer = "data")[shared_features,]
+    }else{
+      new_data <- GetAssayData(new, "data")[shared_features,]
+    }
 
-    new_data <- GetAssayData(new, "data")[shared_features,]
     means <- spmodel@scaling$means
     stdevs  <- spmodel@scaling$stdevs
     new_data <- Matrix::t(new_data)
