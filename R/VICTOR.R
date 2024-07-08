@@ -98,7 +98,8 @@ VICTOR <- function(seuratObj_Query, seuratObj_Ref,
     }
   })
 
-  metadata[[paste0("Diag_", score_type,"_", AnnotCellTypeColumn,  "_StatROC")]] <- ifelse(metadata[[metadata_col]] < thresholds, "F", "T")
+  # metadata[[paste0("Diag_", score_type,"_", AnnotCellTypeColumn,  "_StatROC")]] <- ifelse(metadata[[metadata_col]] < thresholds, "F", "T")
+  metadata[[paste0("Diag_", score_type,"_", AnnotCellTypeColumn)]] <- ifelse(metadata[[metadata_col]] < thresholds, "F", "T")
 
   seuratObj_Query@meta.data <- metadata
 
