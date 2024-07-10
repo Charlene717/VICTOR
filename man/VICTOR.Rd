@@ -9,7 +9,8 @@ VICTOR(
   seuratObj_Ref,
   ActualCellTypeColumn = "Actual_Cell_Type",
   AnnotCellTypeColumn = "Annotation",
-  Add_nROC = FALSE
+  Add_nROC = FALSE,
+  ...
 )
 }
 \arguments{
