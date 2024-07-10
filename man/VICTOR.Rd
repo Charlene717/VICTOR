@@ -10,6 +10,7 @@ VICTOR(
   ActualCellTypeColumn = "Actual_Cell_Type",
   AnnotCellTypeColumn = "Annotation",
   Add_nROC = FALSE,
+  seurat_version = "V4",
   ...
 )
 }
