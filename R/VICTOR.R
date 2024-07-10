@@ -14,7 +14,8 @@
 VICTOR <- function(seuratObj_Query, seuratObj_Ref,
                    ActualCellTypeColumn = "Actual_Cell_Type",
                    AnnotCellTypeColumn = "Annotation",
-                   Add_nROC = FALSE,...) {
+                   Add_nROC = FALSE,
+                   seurat_version = "V4",...) {
 
   if(!require("pbapply")) install.packages("pbapply"); library(pbapply)
   if(!require("caret")) install.packages("caret"); library(caret)
@@ -30,7 +31,7 @@ VICTOR <- function(seuratObj_Query, seuratObj_Ref,
 
   #### VICTORPrep score ####
   if(is.null(seuratObj_Ref@misc[["VICTOR"]])) {
-    seuratObj_Ref <- getFeatureSpace(seuratObj_Ref, "Actual_Cell_Type")  ## Get the feature space to train the classifiers
+    seuratObj_Ref <- getFeatureSpace(seuratObj_Ref, "Actual_Cell_Type", seurat_version = seurat_version,...)  ## Get the feature space to train the classifiers
   }
 
   if(length(seuratObj_Ref@misc[["VICTOR"]]@train) == 0) {
@@ -39,12 +40,12 @@ VICTOR <- function(seuratObj_Query, seuratObj_Ref,
 
   ## Ref
   if (!any(grepl("VICTORScore$", colnames(seuratObj_Ref@meta.data)))) { # if(!"VICTOR_max" %in% colnames(seuratObj_Ref@meta.data)) {
-    seuratObj_Ref <- VICTORPrep(seuratObj_Ref, seuratObj_Ref) #, threshold = Set_scPredict_Thr)
+    seuratObj_Ref <- VICTORPrep(seuratObj_Ref, seuratObj_Ref,seurat_version = seurat_version, ...) #, threshold = Set_scPredict_Thr)
   }
 
   ## Query
   if (!any(grepl("VICTORScore$", colnames(seuratObj_Query@meta.data)))) {  # if(!"VICTOR_max" %in% colnames(seuratObj_Query@meta.data)) {
-    seuratObj_Query <- VICTORPrep(seuratObj_Query, seuratObj_Ref) #, threshold = Set_scPredict_Thr)
+    seuratObj_Query <- VICTORPrep(seuratObj_Query, seuratObj_Ref,seurat_version = seurat_version,...) #, threshold = Set_scPredict_Thr)
   }
 
   #### Modify column names ####

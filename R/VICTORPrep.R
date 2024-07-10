@@ -44,7 +44,7 @@ setGeneric("get_metadata", def = function(object) {
 
 getFeatureSpace <- function(object, pvar, correction = "fdr",
                             sig = 1, reduction = "pca",
-                            seurat_version = "V5",...){
+                            seurat_version = "V4",...){
 
 
   # Validations -------------------------------------------------------------
@@ -250,7 +250,7 @@ project_query <- function(new,
                           max.iter.harmony = 20,
                           recompute_alignment = TRUE,
                           seed = 66,
-                          seurat_version = "V5",
+                          seurat_version = "V4",
                           ...){
 
 
@@ -399,7 +399,7 @@ VICTORPrep <- function(new,
                        threshold = 0.55,
                        max.iter.harmony = 20,
                        recompute_alignment = TRUE,
-                       seed = 66,...){
+                       seed = 66, seurat_version = "V4",...){
 
   # Function validations ----------------------------------------------------
 
@@ -423,7 +423,8 @@ VICTORPrep <- function(new,
                        reference = spmodel,
                        max.iter.harmony = max.iter.harmony,
                        recompute_alignment = recompute_alignment,
-                       seed = seed)
+                       seed = seed,
+                       seurat_version = seurat_version,...)
 
   new_embeddings_aligned <- Embeddings(new[["VICTOR"]])
   colnames(new_embeddings_aligned) <- colnames(spmodel@cell_embeddings)
