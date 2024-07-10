@@ -12,9 +12,9 @@
 #' VICTOR(seuratObj_Query, seuratObj_Ref, ActualCellTypeColumn = "Actual_Cell_Type", AnnotCellTypeColumn = "Annotation", Add_nROC = FALSE)
 
 VICTOR <- function(seuratObj_Query, seuratObj_Ref,
-                    ActualCellTypeColumn = "Actual_Cell_Type",
-                    AnnotCellTypeColumn = "Annotation",
-                    Add_nROC = FALSE) {
+                   ActualCellTypeColumn = "Actual_Cell_Type",
+                   AnnotCellTypeColumn = "Annotation",
+                   Add_nROC = FALSE,...) {
 
   if(!require("pbapply")) install.packages("pbapply"); library(pbapply)
   if(!require("caret")) install.packages("caret"); library(caret)

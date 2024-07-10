@@ -395,11 +395,11 @@ project_query <- function(new,
 ################################################################################
 ## VICTOR.R
 VICTORPrep <- function(new,
-                    reference,
-                    threshold = 0.55,
-                    max.iter.harmony = 20,
-                    recompute_alignment = TRUE,
-                    seed = 66){
+                       reference,
+                       threshold = 0.55,
+                       max.iter.harmony = 20,
+                       recompute_alignment = TRUE,
+                       seed = 66,...){
 
   # Function validations ----------------------------------------------------
 
