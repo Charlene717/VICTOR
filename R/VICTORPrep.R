@@ -110,6 +110,8 @@ getFeatureSpace <- function(object, pvar, correction = "fdr",
   features <- rownames(loadings)
 
   if(seurat_version == "V5"){
+    data <- GetAssayData(object, "RNA", assay = assay)[features,]
+  }else if(seurat_version == "V5M"){
     data <- GetAssayData(object, layer = "data", assay = assay)[features,]
   }else{
     data <- GetAssayData(object, "data", assay = assay)[features,]
@@ -310,6 +312,8 @@ project_query <- function(new,
 
 
     if(seurat_version == "V5"){
+      new_data <- GetAssayData(new, "RNA")[shared_features,]
+    }else if(seurat_version == "V5M"){
       new_data <- GetAssayData(new, layer = "data")[shared_features,]
     }else{
       new_data <- GetAssayData(new, "data")[shared_features,]
