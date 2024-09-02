@@ -15,7 +15,7 @@ VICTOR <- function(seuratObj_Query, seuratObj_Ref,
                    ActualCellTypeColumn = "Actual_Cell_Type",
                    AnnotCellTypeColumn = "Annotation",
                    Add_nROC = FALSE,
-                   seurat_version = "V4",...) {
+                   seurat_version = "V5",...) {
 
   if(!require("pbapply")) install.packages("pbapply"); library(pbapply)
   if(!require("caret")) install.packages("caret"); library(caret)
